@@ -6,6 +6,7 @@ import { styles } from '../styles';
 import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { textVariant } from '../utils/motion';
+import PropTypes from 'prop-types';
 
 const ExperienceCard = ({ experience }) => {
     return (
@@ -49,8 +50,20 @@ const ExperienceCard = ({ experience }) => {
         </VerticalTimelineElement>
     );
 };
+ExperienceCard.propTypes = {
+    experience: PropTypes.shape({
+       date: PropTypes.string.isRequired,
+       iconBg: PropTypes.string.isRequired,
+       icon: PropTypes.string.isRequired,
+       title: PropTypes.string.isRequired,
+       school_name: PropTypes.string.isRequired,
+       company_name: PropTypes.string.isRequired,
+       course: PropTypes.string.isRequired,
+       points: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }).isRequired,
+   };
 
-const Experience = () => {
+export const Experience = () => {
     return (
         <>
             <motion.div variants={textVariant()}>
@@ -68,4 +81,7 @@ const Experience = () => {
     );
 };
 
-export default SectionWrapper(Experience, 'experience');
+
+const WrappedExperience = SectionWrapper(Experience, 'experience');
+export default WrappedExperience;
+
